@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huiming Sun - Computer Vision Researcher</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.1;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            background: var(--gradient-1);
+            padding: 5px;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .affiliation {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--white);
+            color: var(--primary-color);
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: white;
+        }
+
+        .social-links a:hover::before {
+            transform: scale(1);
+        }
+
+        .social-links a span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--primary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-1);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .keyword {
+            padding: 0.5rem 1.5rem;
+            background: var(--white);
+            border-radius: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .keyword::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            transition: left 0.3s ease;
+        }
+
+        .keyword:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            color: white;
+        }
+
+        .keyword:hover::before {
+            left: 0;
+        }
+
+        .keyword span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Research Section */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .research-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+
+        .research-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .research-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .research-card-content {
+            padding: 2rem;
+        }
+
+        .research-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .research-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Publications Section */
+        .publication-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .publication-item {
+            background: var(--white);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .publication-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-1);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
+        }
+
+        .publication-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .publication-item:hover::after {
+            transform: scaleY(1);
+        }
+
+        .publication-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-authors {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .publication-venue {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .publication-links {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .publication-links a {
+            padding: 0.4rem 1rem;
+            background: var(--gradient-1);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .publication-links a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .publication-links a:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Awards Section */
+        .awards-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .awards-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: var(--gradient-1);
+        }
+
+        .award-item {
+            position: relative;
+            padding: 2rem;
+            width: calc(50% - 2rem);
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .award-item:nth-child(odd) {
+            margin-left: auto;
+            margin-right: 2rem;
+        }
+
+        .award-item:nth-child(even) {
+            margin-left: 2rem;
+        }
+
+        .award-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            top: 2rem;
+        }
+
+        .award-item:nth-child(odd)::before {
+            left: -2.5rem;
+        }
+
+        .award-item:nth-child(even)::before {
+            right: -2.5rem;
+        }
+
+        .award-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .award-year {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .award-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
+        }
+
+        .award-description {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--gradient-1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.05);
+            transform: rotate(45deg);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(45deg) translateX(-100%); }
+            50% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .contact .section-title {
+            color: white;
+        }
+
+        .contact .section-title::after {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .contact-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            border-bottom-color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .awards-timeline::before {
+                left: 2rem;
+            }
+
+            .award-item {
+                width: calc(100% - 4rem);
+                margin-left: 4rem !important;
+                margin-right: 0 !important;
+            }
+
+            .award-item::before {
+                left: -2.5rem !important;
+            }
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">Huiming Sun</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#awards">Awards</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="profile-img">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='90' fill='url(%23grad1)' /%3E%3Ctext x='100' y='110' font-family='Arial' font-size='60' fill='white' text-anchor='middle'%3EHS%3C/text%3E%3C/svg%3E" alt="Huiming Sun">
+            </div>
+            <h1>Huiming Sun, Ph.D.</h1>
+            <p class="tagline">Computer Vision & AI Researcher</p>
+            <p class="affiliation">Senior Research Engineer at OPPO | San Francisco Bay Area</p>
+            <div class="social-links">
+                <a href="https://scholar.google.com/citations?user=gN2GpPwAAAAJ&hl=zh-CN" target="_blank" title="Google Scholar">
+                    <span>📚</span>
+                </a>
+                <a href="https://www.linkedin.com/in/huiming-sun-967419197/" target="_blank" title="LinkedIn">
+                    <span>💼</span>
+                </a>
+                <a href="mailto:hsun@vikes.csuohio.edu" title="Email">
+                    <span>✉️</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>I am a Senior Research Engineer at OPPO, working on cutting-edge computer vision technologies including Stable Diffusion, Video Inpainting, and Video Generation. I completed my Ph.D. at Cleveland State University under the supervision of Dr. Hongkai Yu at the Cleveland Vision & AI Lab, where I was the first Ph.D. graduate in March 2024.</p>
+                <p>My research interests span across computer vision, deep learning, and their applications in autonomous driving, remote sensing, and semantic segmentation. I have published multiple papers in top-tier conferences and have been recognized with several awards for my contributions to the field.</p>
+                <div class="keywords">
+                    <div class="keyword"><span>Computer Vision</span></div>
+                    <div class="keyword"><span>Deep Learning</span></div>
+                    <div class="keyword"><span>Autonomous Driving</span></div>
+                    <div class="keyword"><span>Remote Sensing</span></div>
+                    <div class="keyword"><span>Semantic Segmentation</span></div>
+                    <div class="keyword"><span>Video Generation</span></div>
+                    <div class="keyword"><span>Stable Diffusion</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Research Areas</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <div class="research-card-content">
+                        <h3>🚗 Autonomous Driving</h3>
+                        <p>Developing advanced perception systems for connected and automated vehicles (CAV), including V2V cooperative perception and low-light driving scenarios. Our work on V2V4Real dataset was accepted as a highlight paper at CVPR 2023.</p>
+                    </div>
+                </div>
+                <div class="research-card">
+                    <div class="research-card-content">
+                        <h3>🎨 Generative AI</h3>
+                        <p>Working on state-of-the-art generative models including Stable Diffusion for video inpainting and generation. Focus on creating realistic and temporally consistent video content using deep learning techniques.</p>
+                    </div>
+                </div>
+                <div class="research-card">
+                    <div class="research-card-content">
+                        <h3>🛰️ Remote Sensing</h3>
+                        <p>Applying computer vision techniques to analyze satellite and aerial imagery for various applications including land use classification, change detection, and environmental monitoring.</p>
+                    </div>
+                </div>
+                <div class="research-card">
+                    <div class="research-card-content">
+                        <h3>🔍 Semantic Segmentation</h3>
+                        <p>Developing robust semantic segmentation algorithms for understanding complex scenes in both natural and urban environments, with applications in autonomous navigation and scene understanding.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Selected Publications</h2>
+            <div class="publication-list">
+                <div class="publication-item">
+                    <div class="publication-title">Convolutional neural networks based remote sensing scene classification under clear and cloudy environments</div>
+                    <div class="publication-authors"><strong>H Sun</strong>, Y Lin, Q Zou, S Song, J Fang, H Yu</div>
+                    <div class="publication-venue">Proceedings of the IEEE/CVF International Conference on Computer Vision, 713-720, 2021</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Deep transfer learning for intelligent vehicle perception: A survey</div>
+                    <div class="publication-authors">X Liu, J Li, J Ma, <strong>H Sun</strong>, Z Xu, T Zhang, H Yu</div>
+                    <div class="publication-venue">Green Energy and Intelligent Transportation 2 (5), 100125, 2023</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">NTIRE 2025 challenge on single image reflection removal in the wild: Datasets, methods and results</div>
+                    <div class="publication-authors">K Yang, J Cai, L Ouyang, FA Vasluianu, R Timofte, J Ding, <strong>H Sun</strong>, L Fu, ...</div>
+                    <div class="publication-venue">Proceedings of the Computer Vision and Pattern Recognition Conference, 1301-1311, 2025</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Defense against adversarial cloud attack on remote sensing salient object detection</div>
+                    <div class="publication-authors"><strong>H Sun</strong>, L Fu, J Li, Q Guo, Z Meng, T Zhang, Y Lin, H Yu</div>
+                    <div class="publication-venue">Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2024</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Detecting phone-related pedestrian distracted behaviours via a two-branch convolutional neural network</div>
+                    <div class="publication-authors">H Saenz, <strong>H Sun</strong>, L Wu, X Zhou, H Yu</div>
+                    <div class="publication-venue">IET Intelligent Transport Systems, 2020</div>
+                    <div class="publication-links">
+                        <a href="https://doi.org/10.1049/itr2.12012">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Coarse-to-fine task-driven inpainting for geoscience images</div>
+                    <div class="publication-authors"><strong>H Sun</strong>, J Ma, Q Guo, Q Zou, S Song, Y Lin, H Yu</div>
+                    <div class="publication-venue">IEEE Transactions on Circuits and Systems for Video Technology 33 (12), 7170-7183, 2023</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Learning to detect phone-related pedestrian distracted behaviors with synthetic data</div>
+                    <div class="publication-authors">E Hatay, J Ma, <strong>H Sun</strong>, J Fang, Z Gao, H Yu</div>
+                    <div class="publication-venue">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops, 2021</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">A min-max optimization framework for multi-task deep neural network compression</div>
+                    <div class="publication-authors">J Guo, <strong>H Sun</strong>, M Qin, H Yu, T Zhang</div>
+                    <div class="publication-venue">2024 IEEE International Symposium on Circuits and Systems (ISCAS), 1-5, 2024</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Survey on single-image reflection removal using deep learning techniques</div>
+                    <div class="publication-authors">K Yang, <strong>H Sun</strong>, J Cai, L Fu, J Ding, J Li, CM Ho, Z Meng</div>
+                    <div class="publication-venue">arXiv preprint arXiv:2502.08836, 2025</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Automating intersection marking data collection and condition assessment at scale with an artificial intelligence-powered system</div>
+                    <div class="publication-authors">K Xie, <strong>H Sun</strong>, X Dong, H Yang, H Yu</div>
+                    <div class="publication-venue">Computational Urban Science 3 (1), 24, 2023</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Openrr-1k: A scalable dataset for real-world reflection removal</div>
+                    <div class="publication-authors">K Yang, L Ouyang, <strong>H Sun</strong>, J Cai, L Fu, J Ding, CM Ho, Z Meng</div>
+                    <div class="publication-venue">arXiv preprint arXiv:2506.08299, 2025</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">EVD4UAV: An Altitude-Sensitive Benchmark to Evade Vehicle Detection in UAV</div>
+                    <div class="publication-authors"><strong>H Sun</strong>, J Guo, Z Meng, T Zhang, J Fang, Y Lin, H Yu</div>
+                    <div class="publication-venue">2024 IEEE Intelligent Vehicles Symposium (IV), 545-552, 2024</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">F2t2-hit: A u-shaped fft transformer and hierarchical transformer for reflection removal</div>
+                    <div class="publication-authors">J Cai, K Yang, L Ouyang, L Fu, J Ding, <strong>H Sun</strong>, CM Ho, Z Meng</div>
+                    <div class="publication-venue">arXiv preprint arXiv:2506.05489, 2025</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">TokenMotion: Decoupled Motion Control via Token Disentanglement for Human-centric Video Generation</div>
+                    <div class="publication-authors">R Li, D Xing, <strong>H Sun</strong>, Y Ha, J Shen, C Ho</div>
+                    <div class="publication-venue">Proceedings of the Computer Vision and Pattern Recognition Conference, 1951-1961, 2025</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">TEDNet: transformer-aware encoder-decoder network for salient object detection in remote sensing images</div>
+                    <div class="publication-authors"><strong>H Sun</strong>, Y Lin, Z Meng, H Yu</div>
+                    <div class="publication-venue">Fifth International Conference on Image, Video Processing, and Artificial Intelligence, 2024</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">An Automated System for Large-Scale Intersection Marking Data Collection and Condition Assessment</div>
+                    <div class="publication-authors">K Xie, H Yang, X Dong, H Yu, <strong>H Sun</strong></div>
+                    <div class="publication-venue">NCHRP-IDEA Program Project Final Report, 2022</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">VIP: Video Inpainting Pipeline for Real World Human Removal</div>
+                    <div class="publication-authors"><strong>H Sun</strong>, Y Li, K Yang, R Li, D Xing, Y Xie, L Fu, K Zhang, M Chen, J Ding, ...</div>
+                    <div class="publication-venue">arXiv preprint arXiv:2504.03041, 2025</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Deep Learning Based Remote Sensing Image Analysis Under Complex Scenarios</div>
+                    <div class="publication-authors"><strong>H Sun</strong></div>
+                    <div class="publication-venue">Ph.D. Dissertation, Cleveland State University, 2024</div>
+                    <div class="publication-links">
+                        <a href="#">Paper</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="awards" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Awards & Honors</h2>
+            <div class="awards-timeline">
+                <div class="award-item">
+                    <div class="award-year">2024</div>
+                    <div class="award-title">First Ph.D. Graduate</div>
+                    <div class="award-description">Cleveland Vision & AI Lab, Cleveland State University</div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-year">2023</div>
+                    <div class="award-title">CVPR Highlight Paper Award</div>
+                    <div class="award-description">Top 2.5% of all submissions for V2V4Real dataset</div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-year">2023</div>
+                    <div class="award-title">Graduate Student Research Award</div>
+                    <div class="award-description">$4,000 award from Cleveland State University</div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-year">2022-2024</div>
+                    <div class="award-title">Multiple Conference Papers</div>
+                    <div class="award-description">CVPR, ICRA, WACV, IEEE Transactions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p>📧 Email: <a href="mailto:hsun@vikes.csuohio.edu">hsun@vikes.csuohio.edu</a></p>
+                    <p>💼 LinkedIn: <a href="https://www.linkedin.com/in/huiming-sun-967419197/" target="_blank">linkedin.com/in/huiming-sun-967419197</a></p>
+                    <p>📚 Google Scholar: <a href="https://scholar.google.com/citations?user=gN2GpPwAAAAJ&hl=zh-CN" target="_blank">Scholar Profile</a></p>
+                    <p>📍 Location: San Francisco Bay Area, California</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Huiming Sun. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Reveal animation on scroll
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial check
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Add hover effect to research cards
+        const researchCards = document.querySelectorAll('.research-card');
+        researchCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) rotateX(5deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotateX(0)';
+            });
+        });
+
+        // Dynamic typing effect for tagline
+        const tagline = document.querySelector('.tagline');
+        const text = tagline.textContent;
+        tagline.textContent = '';
+        let index = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                tagline.textContent += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+
+        // Start typing effect after page loads
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 1000);
+        });
+
+        // Add interactive particle background
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '-1';
+        document.body.appendChild(canvas);
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 50;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(102, 126, 234, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        // Initialize particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            // Draw connections
+            particles.forEach((p1, i) => {
+                particles.slice(i + 1).forEach(p2 => {
+                    const distance = Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2);
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(102, 126, 234, ${0.1 * (1 - distance / 100)})`;
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+
+        // Resize canvas on window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Add mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            particles.forEach(particle => {
+                const dx = mouseX - particle.x;
+                const dy = mouseY - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 100) {
+                    const force = (100 - distance) / 100;
+                    particle.vx += (dx / distance) * force * 0.02;
+                    particle.vy += (dy / distance) * force * 0.02;
+                }
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 1s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
